@@ -1,0 +1,72 @@
+<div class="container mt-4">
+  <div class="row text-center text-white justify-content-center align-items-center">
+    <div class="col-sm-4 col-6">
+        <div class="card">
+          <div class="card-header bg-secondary text-white">
+            Cinco (5) nombres mas comunes entre miembros de River
+          </div>
+          <ul class="list-group" *ngFor="let member of commonNamesOfRiverMembers">
+            <li class="list-group-item text-dark">{{member.name}}</li>
+          </ul>
+      </div>
+    </div>
+    <div class="col-sm-8 col-6">
+      <p class="mb-1 fs-4">Cantidad de socios: {{ totalMembers }}</p>
+      <p class="mt-1 mb-0 fs-4">Promedio de edad de socios de Racing: {{ ageAverageOfRacingMembers }}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-6 mt-sm-2 mt-md-1 mt-3 mb-4">
+      <div class="card text-dark text-center over">
+        <div class="card-header bg-secondary text-center text-white">
+          Socios casados con estudios universitarios
+        </div>
+        <table class="table table-sm">
+          <thead class="sticky-top bg-white">
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Edad</th>
+              <th scope="col">Equipo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let member of marriedMembers">
+              <td>{{member.name}}</td>
+              <td>{{member.age}}</td>
+              <td>{{member.team}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-6 col-lg-6 mt-sm-2 mt-md-1 mt-3 mb-4">
+      <div class="card over">
+        <div class="card-header bg-secondary text-center text-white">
+          Equipos por cantidad de socios
+        </div>
+        <table class="table table-sm ">
+          <thead class="sticky-top bg-white">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Equipo</th>
+              <th scope="col">Edad Promedio</th>
+              <th scope="col">Menor Edad</th>
+              <th scope="col">Mayor Edad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let member of teamsByMembers; let i = index">
+              <th> {{i + 1}} </th>
+              <td>{{member.team}}</td>
+              <td>{{member.averageAges}}</td>
+              <td>{{member.minAge}}</td>
+              <td>{{member.maxAge}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

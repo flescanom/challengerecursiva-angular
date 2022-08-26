@@ -1,0 +1,9 @@
+hr {
+    color: #ffffff;
+    border: 1.5px solid;
+}
+
+.over {
+    overflow-y: scroll;
+    max-height: 300px;
+}

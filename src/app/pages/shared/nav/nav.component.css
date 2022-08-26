@@ -1,0 +1,11 @@
+* {
+    background-color: #292A2E;
+}
+
+.nav {
+    border-bottom: solid 2px #4F5259;
+}
+
+.pointer {
+    cursor: pointer;
+}

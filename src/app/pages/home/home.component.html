@@ -1,0 +1,35 @@
+<div
+    class="card file-upload"
+    style="width: 16rem;"
+    appDropFiles
+    [file]="file"
+    (mouseOn)="isOnDropZone = $event"
+    (loadFile)="cargaDeArchivo($event)"
+    [ngClass]="{'file-over': isOnDropZone}" 
+    >
+
+    <div class="card-header bg-white">
+        <div class="row py-5 px-1" *ngIf="file === undefined">
+            <div class="col-2" (click)="uploadFile()">
+                <fa-icon [icon]="faPlusCircle" size="2x"></fa-icon>
+            </div>
+            <div class="col-10">
+                <h5 class="card-title" (click)="uploadFile()">Añade tu archivo</h5>
+                <h6 class="card-subtitle mb-2 sub-text" (click)="uploadFile()"><u>O arrastralo hasta acá</u></h6>
+            </div>
+            <input [disabled]="file !== undefined" type="file" accept="text/csv" style="display:none" (change)="handleUpload($event)">
+        </div >
+        <div *ngIf="file !== undefined">
+            <div class="col-12 text-center">
+                <h5 class="card-title fw-bold">Archivo cargado:</h5>
+                <div class="d-flex justify-content-center">
+                    <h6 class="card-title">{{ file.fileName }}</h6>
+                    <fa-icon (click)="removeFile()" class="ms-2" [icon]="faBan" style="color: red"></fa-icon>
+                </div>
+            </div>
+        </div>
+        <div class="card-body d-flex justify-content-center flex-column">
+            <button class="btn btn-primary rounded-pill px-5" [disabled]="file === undefined" (click)="sendFile()">Enviar</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+.file-upload {
+    position: absolute;
+    top: 20%;
+    left: 5%;
+}
+
+.file-over { 
+	border: dotted 3px dodgerblue; 
+}
+
+.card-header {
+    cursor: pointer;
+    border-bottom-left-radius: 6px !important;
+    border-bottom-right-radius: 6px !important
+}
+
+/* .fa-plus-circle {
+    color:#0d6efd;
+}
+
+.icon-plus:hover {
+    color: black !important;
+} */
+
+.sub-text {
+    color: #6c757d;
+    transition: 0.5s;
+}
+
+
+.sub-text:hover {
+    color: #0d6efd;
+}
+
+.btn:disabled {
+    background-color: #babcbf;
+    color: #ffffff;
+    border: 0px
+}
