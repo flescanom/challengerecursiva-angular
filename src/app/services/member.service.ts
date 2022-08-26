@@ -5,22 +5,22 @@ import { Member } from '../models/member';
 @Injectable({
   providedIn: 'root'
 })
-export class SociosService {
+export class MemberService {
 
-  private _socios: Member[] = [];
+  private _members: Member[] = [];
   
   constructor() { 
 
     // Si el arreglo de socios se encuentra vacio lo recupera desde el localStorage.
 
-    if(this._socios.length === 0) {
-      let sociosTemp: Member[] = [];
-      this._socios = [];
+    if(this._members.length === 0) {
+      let membersTemp: Member[] = [];
+      this._members = [];
 
-      if(localStorage.getItem('socios')){
-        sociosTemp = JSON.parse(localStorage.getItem('socios') || '{}');
-        sociosTemp.forEach((member: any) => {
-          this._socios.push(new Member(member.name, member.age, member.team, member.maritalStatus, member.educationLevel));
+      if(localStorage.getItem('members')){
+        membersTemp = JSON.parse(localStorage.getItem('members') || '{}');
+        membersTemp.forEach((member: any) => {
+          this._members.push(new Member(member.name, member.age, member.team, member.maritalStatus, member.educationLevel));
         });
       }
     }
@@ -43,28 +43,28 @@ export class SociosService {
 
   // Funcion para separa el archivo CSV y crear un arreglo con los datos.
   createArray(data: any) {
-      this._socios = [];
+      this._members = [];
       const rows = data.split('\n');
       for(let i = 0; i < rows.length - 1; i++) {
         let row = rows[i].split(',');
         let field = row[0].split(';');
         let level = String(field[4]);
-        this._socios.push(new Member(field[0], parseInt( field[1], 10), field[2], field[3], level.slice(0, -1)));
+        this._members.push(new Member(field[0], parseInt( field[1], 10), field[2], field[3], level.slice(0, -1)));
       }
       localStorage.clear();
-      localStorage.setItem('socios', JSON.stringify(this._socios));
+      localStorage.setItem('members', JSON.stringify(this._members));
   }
 
-  public getQuantitySocios() {
-    return this._socios.length;
+  public getQuantityMembers() {
+    return this._members.length;
   }
 
-  public getSocios() {
-    return this._socios;
+  public getMembers() {
+    return this._members;
   }
 
   public getAverageAgeRacingMembers(team: string): number {
-      return this.averageAgeByTeam(team, this._socios);
+      return this.averageAgeByTeam(team, this._members);
   }
 
   // Se filtran los socios casados y con estudios universitarios, se quitan las propiedades no necesarias
@@ -72,12 +72,12 @@ export class SociosService {
   public getMarriedMembers(): Member[] {
     let tempArray: Member[] = [];
 
-    for (let i = 0; i < this._socios.length; i++) {
+    for (let i = 0; i < this._members.length; i++) {
       
-      if(this._socios[i].maritalStatus === 'Casado' && this._socios[i].educationLevel === 'Universitario') {
-        delete this._socios[i].maritalStatus;
-        delete this._socios[i].educationLevel;
-        tempArray.push(this._socios[i]);
+      if(this._members[i].maritalStatus === 'Casado' && this._members[i].educationLevel === 'Universitario') {
+        delete this._members[i].maritalStatus;
+        delete this._members[i].educationLevel;
+        tempArray.push(this._members[i]);
       }
 
       if(tempArray.length === 100) {
@@ -95,10 +95,10 @@ export class SociosService {
   public getCommonNameOfRiverMembers(): RiverMember[] {
     let namesMembers: RiverMember[] = [];
 
-    this._socios.forEach((socio) => {
+    this._members.forEach((member) => {
 
-      if(socio.team === 'River') {
-        namesMembers.push(new RiverMember(socio.name, socio.age, socio.team));  
+      if(member.team === 'River') {
+        namesMembers.push(new RiverMember(member.name, member.age, member.team));  
       }  
     });
 
@@ -134,7 +134,7 @@ export class SociosService {
   getListByQuantityOfMembers():any[] {
       let result: any;
     
-      result = this._socios.reduce( (groups:any, member) => {
+      result = this._members.reduce( (groups:any, member) => {
           let val = member.team;
           let ages: number[] = []
           groups[val] = groups[val] || {team: member.team, ages , quantityMembers: 0, averageAges: 0, maxAge:0, minAge:0};
@@ -183,10 +183,13 @@ export class SociosService {
 
   }
 
-  // getTeams() {
-  //   this._socios.forEach(socio => {
-      
-  //   });
-  // }
+  public getLocalStorage(): boolean {
+    if(localStorage.getItem('members')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }
 

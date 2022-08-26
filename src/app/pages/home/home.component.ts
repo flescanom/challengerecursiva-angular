@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FileItem } from 'src/app/models/file-item';
-import { SociosService } from 'src/app/services/socios.service';
+import { FileItem } from '../../models/file-item';
+import { MemberService } from '../../services/member.service';
 import { faPlusCircle, faBan } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -16,18 +16,17 @@ export class HomeComponent implements OnInit {
   faPlusCircle = faPlusCircle;
   faBan = faBan;
 
-  constructor(public socios:SociosService,
+  constructor(public members:MemberService,
               private _route: Router) {
     
    }
 
   ngOnInit(): void {
-    localStorage.removeItem('socios');
+    localStorage.removeItem('members');
   }
 
   uploadFile() {
     localStorage.clear();
-    console.log('Se presionó el boton');
     document.querySelector('input')?.click()
   }
 
@@ -36,9 +35,8 @@ export class HomeComponent implements OnInit {
   }
 
   sendFile() {
-    this.socios.readFile(this.file?.file)
+    this.members.readFile(this.file?.file)
       .then(() => {
-        console.log('Arhivo Cargado');
         this._route.navigate(['/information']);
       }).catch((error) => {
         console.log(error);
@@ -54,7 +52,6 @@ export class HomeComponent implements OnInit {
   }
 
   removeFile() {
-    console.log('borrar archivo');
     this.file = undefined;
   }
 

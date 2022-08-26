@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Member } from '../../models/member';
-import { SociosService } from 'src/app/services/socios.service';
+import { MemberService } from '../../services/member.service';
 import { RiverMember } from 'src/app/models/riverMember';
 
 @Component({
@@ -16,14 +16,14 @@ export class InformationComponent implements OnInit {
   teamsByMembers: any[] = [];
   commonNamesOfRiverMembers: RiverMember[] = [];
 
-  constructor( private _socios:SociosService) { }
+  constructor( private _members:MemberService) { }
 
   ngOnInit(): void {
-    this.totalMembers = this._socios.getQuantitySocios();
-    this.ageAverageOfRacingMembers = this._socios.getAverageAgeRacingMembers('Racing');
-    this.marriedMembers = this._socios.getMarriedMembers();
-    this.teamsByMembers = this._socios.getListByQuantityOfMembers();
-    this.commonNamesOfRiverMembers = this._socios.getCommonNameOfRiverMembers();
+    this.totalMembers = this._members.getQuantityMembers();
+    this.ageAverageOfRacingMembers = this._members.getAverageAgeRacingMembers('Racing');
+    this.marriedMembers = this._members.getMarriedMembers();
+    this.teamsByMembers = this._members.getListByQuantityOfMembers();
+    this.commonNamesOfRiverMembers = this._members.getCommonNameOfRiverMembers();
   }
 
 }
