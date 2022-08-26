@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RiverMember } from '../models/riverMember';
 import { Member } from '../models/member';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class MemberService {
 
   private _members: Member[] = [];
   
-  constructor() { 
+  constructor(private _router: Router) { 
 
     // Si el arreglo de socios se encuentra vacio lo recupera desde el localStorage.
 
@@ -189,6 +190,10 @@ export class MemberService {
     } else {
       return false;
     }
+  }
+
+  public goToHome() {
+    this._router.navigate(['/home']);
   }
 
 }

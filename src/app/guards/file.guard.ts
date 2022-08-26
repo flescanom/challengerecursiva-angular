@@ -14,6 +14,7 @@ export class FileGuard implements CanActivate {
     if( this._member.getLocalStorage()) {
       return true;
     } else {
+      this._member.goToHome();
       return false;
     }
   }
